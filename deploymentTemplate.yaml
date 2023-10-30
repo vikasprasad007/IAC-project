@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ejbsamplegradle
+    app.kubernetes.io/component: ejbsamplegradle
+  name: ejbsamplegradle
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ejbsamplegradle
+  template:
+    metadata:
+      labels:
+        app: ejbsamplegradle
+    spec:
+      containers:
+        - env: []
+          image: hs/ejbsamplegradle
+          imagePullPolicy: Always
+          name: ejbsamplegradle
+          volumeMounts: null
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 25m
+              memory: 64Mi
+      imagePullSecrets:
+        - name: ejbsamplegradle-image-pull-secret
+      restartPolicy: Always
+      volumes: null
+      nodeSelector: null
